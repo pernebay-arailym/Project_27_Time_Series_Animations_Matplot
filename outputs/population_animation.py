@@ -2,6 +2,17 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
+def setup_plot_style(ax):
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.spines['left'].set_visible(False)
+    ax.spines['bottom'].set_visible(False)
+    ax.tick_params(axis='y', which='both', left=False)
+    ax.tick_params(axis='x', which='both', bottom=False)
+    ax.set_xlabel('Total population on 1st January')
+    ax.set_title('Top 10 Countries by Population')
+
+
 def create_animation(df):
 
     df = pd.read_csv('/Users/pernebayarailym/Documents/Portfolio Projects AP/Python Projects/Project_27_Time_Series_Animations_Matplot/data/cleaned-data.csv')
