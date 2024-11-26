@@ -26,5 +26,5 @@ def create_animation(df):
 if __name__ == '__main__':
     df =pd.read_csv('/Users/pernebayarailym/Documents/Portfolio Projects AP/Python Projects/Project_27_Time_Series_Animations_Matplot/data/cleaned-data.csv')
     anim=create_animation(df)
-    anim.save('video.mp4', writer='ffmped', fps=30)  
+    anim.save('video.mp4', writer='ffmpeg', fps=30)  
     plt.show()
