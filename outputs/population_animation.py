@@ -2,21 +2,29 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
-pop_data = pd.read_csv('/Users/pernebayarailym/Documents/Portfolio Projects AP/Python Projects/Project_27_Time_Series_Animations_Matplot/data/cleaned-data.csv')
+def create_animation(df):
 
-frames = pop_data['Time'].unique()
+    df = pd.read_csv('/Users/pernebayarailym/Documents/Portfolio Projects AP/Python Projects/Project_27_Time_Series_Animations_Matplot/data/cleaned-data.csv')
 
-fig, ax = plt.subplots(figsize=(12,6))
+    frames = df['Time'].unique()
 
-#plt.barh(top_countries['Location'], top_countries['TPopulation1Jan'])
+    fig, ax = plt.subplots(figsize=(12,6))
 
-def animate(frame):
-    ax.clear()
+    #plt.barh(top_countries['Location'], top_countries['TPopulation1Jan'])
 
-    pop_data_frame = pop_data[pop_data['Time'] == frame] 
+    def animate(frame):
+        ax.clear()
 
-    top_countries = pop_data_frame.nlargest(10, 'TPopulation1Jan').sort_values('TPopulation1Jan', ascending=True)
-    ax.barh(top_countries['Location'], top_countries['TPopulation1Jan'])
+        pop_data_frame = df[df['Time'] == frame] 
 
-anim = animation.FuncAnimation(fig, animate, frames=frames, interval=200)
-plt.show()
+        top_countries = pop_data_frame.nlargest(10, 'TPopulation1Jan').sort_values('TPopulation1Jan', ascending=True)
+        ax.barh(top_countries['Location'], top_countries['TPopulation1Jan'])
+
+    anim = animation.FuncAnimation(fig, animate, frames=frames, interval=200)
+    return anim
+
+if __name__ == '__main__':
+    df =pd.read_csv('/Users/pernebayarailym/Documents/Portfolio Projects AP/Python Projects/Project_27_Time_Series_Animations_Matplot/data/cleaned-data.csv')
+    anim=create_animation(df)
+    anim.save('video.mp4', writer='ffmped', fps=30)  
+    plt.show()
