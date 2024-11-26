@@ -31,6 +31,9 @@ def create_animation(df):
         top_countries = pop_data_frame.nlargest(10, 'TPopulation1Jan').sort_values('TPopulation1Jan', ascending=True)
         ax.barh(top_countries['Location'], top_countries['TPopulation1Jan'])
 
+        for i, row in top_countries.iterrows():
+            ax.text(row['TPopulation1Jan'], row['Location'], f"{row['TPopulation1Jan']:,.2f}", va='center')
+
         setup_plot_style(ax)
         add_year_text(ax, frame)
         plt.tight_layout()
