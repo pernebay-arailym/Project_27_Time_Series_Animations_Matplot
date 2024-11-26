@@ -11,9 +11,7 @@ def setup_plot_style(ax):
     ax.set_title('Top 10 Countries by Population')
 
 def add_year_text(ax, year):
-    ax.text(0.5, 0.9, str(year), transform=ax.transAxes, ha='center', fontsize=20)
-
-
+    ax.text(0.9, 0.1, str(year), transform=ax.transAxes, ha='center', fontsize=20)
 
 def create_animation(df):
 
@@ -34,6 +32,7 @@ def create_animation(df):
         ax.barh(top_countries['Location'], top_countries['TPopulation1Jan'])
 
         setup_plot_style(ax)
+        add_year_text(ax, frame)
 
     anim = animation.FuncAnimation(fig, animate, frames=frames, interval=200)
     
