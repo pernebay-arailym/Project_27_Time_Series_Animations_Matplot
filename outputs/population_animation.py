@@ -15,5 +15,8 @@ fig, ax = plt.subplot(figsize=(12,6))
 #plt.barh(top_countries['Location'], top_countries['TPopulation1Jan'])
 
 def animate(frame):
+    pop_data = pop_data[pop_data['Time'] == frame] 
+
+    top_countries = pop_data_1950.nlargest(10, 'TPopulation1Jan').sort_values('TPopulation1Jan', ascending=True)
 
 animation.FuncAnimation(fig, animate, frames=frames, interval=200)
