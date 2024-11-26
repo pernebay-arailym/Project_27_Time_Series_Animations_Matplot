@@ -6,17 +6,17 @@ pop_data = pd.read_csv('/Users/pernebayarailym/Documents/Portfolio Projects AP/P
 
 frames = pop_data['Time'].unique()
 
-pop_data_1950 = pop_data[pop_data['Time'] == 1950]
-
-top_countries = pop_data_1950.nlargest(10, 'TPopulation1Jan').sort_values('TPopulation1Jan', ascending=True)
-
-fig, ax = plt.subplot(figsize=(12,6))
+fig, ax = plt.subplots(figsize=(12,6))
 
 #plt.barh(top_countries['Location'], top_countries['TPopulation1Jan'])
 
 def animate(frame):
-    pop_data = pop_data[pop_data['Time'] == frame] 
+    ax.clear()
 
-    top_countries = pop_data_1950.nlargest(10, 'TPopulation1Jan').sort_values('TPopulation1Jan', ascending=True)
+    pop_data_frame = pop_data[pop_data['Time'] == frame] 
 
-animation.FuncAnimation(fig, animate, frames=frames, interval=200)
+    top_countries = pop_data_frame.nlargest(10, 'TPopulation1Jan').sort_values('TPopulation1Jan', ascending=True)
+    ax.barh(top_countries['Location'], top_countries['TPopulation1Jan'])
+
+anim = animation.FuncAnimation(fig, animate, frames=frames, interval=200)
+plt.show()
