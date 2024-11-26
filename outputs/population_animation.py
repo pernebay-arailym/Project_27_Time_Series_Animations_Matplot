@@ -7,8 +7,8 @@ def setup_plot_style(ax):
     ax.spines['right'].set_visible(False)
     ax.tick_params(axis='y', which='both', left=False)
     ax.tick_params(axis='x', which='both', bottom=False)
-    ax.set_xlabel('Total population on 1st January')
-    ax.set_title('Top 10 Countries by Population')
+    ax.set_xlabel('Total population')
+    ax.set_title('Top 10 Countries by Population (in millions)')
 
 def add_year_text(ax, year):
     ax.text(0.9, 0.1, str(year), transform=ax.transAxes, ha='center', fontsize=20)
@@ -33,6 +33,7 @@ def create_animation(df):
 
         setup_plot_style(ax)
         add_year_text(ax, frame)
+        plt.tight_layout()
 
     anim = animation.FuncAnimation(fig, animate, frames=frames, interval=200)
     
