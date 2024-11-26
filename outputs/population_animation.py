@@ -5,12 +5,14 @@ import matplotlib.animation as animation
 def setup_plot_style(ax):
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
-    ax.spines['left'].set_visible(False)
-    ax.spines['bottom'].set_visible(False)
     ax.tick_params(axis='y', which='both', left=False)
     ax.tick_params(axis='x', which='both', bottom=False)
     ax.set_xlabel('Total population on 1st January')
     ax.set_title('Top 10 Countries by Population')
+
+def add_year_text(ax, year):
+    ax.text(0.5, 0.9, str(year), transform=ax.transAxes, ha='center', fontsize=20)
+
 
 
 def create_animation(df):
@@ -31,7 +33,10 @@ def create_animation(df):
         top_countries = pop_data_frame.nlargest(10, 'TPopulation1Jan').sort_values('TPopulation1Jan', ascending=True)
         ax.barh(top_countries['Location'], top_countries['TPopulation1Jan'])
 
+        setup_plot_style(ax)
+
     anim = animation.FuncAnimation(fig, animate, frames=frames, interval=200)
+    
     return anim
 
 if __name__ == '__main__':
