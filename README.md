@@ -1,4 +1,4 @@
-## Time Series Animations
+# Time Series Animations
 
 Animations of Time Series Data (Bar Chart & Line Graph) Using Matplotlib.
 
